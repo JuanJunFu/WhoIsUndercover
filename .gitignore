@@ -1,0 +1,16 @@
+# Executables
+*.exe
+*.spec
+
+# Build folders
+build/
+dist/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local scripts (not needed for web)
+game_server.py
+build_exe.bat
+start_game.bat
