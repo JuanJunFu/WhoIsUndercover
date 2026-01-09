@@ -6,13 +6,13 @@
         "path": "fa0ce324-994a-4289-8ed8-d802f5cc39c1",
         "options": {}
       },
-      "id": "d697a547-a7f6-411f-beab-351ccd8b1bfd",
+      "id": "0976fd12-0e5e-4c15-994e-9c563e3cb1fc",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        288,
-        -224
+        -192,
+        0
       ],
       "webhookId": "fa0ce324-994a-4289-8ed8-d802f5cc39c1"
     },
@@ -22,13 +22,13 @@
         "responseBody": "={{ JSON.stringify({ success: true, message: '資料已記錄' }) }}",
         "options": {}
       },
-      "id": "d00ac6b1-a366-45be-b6e8-f504d57b006e",
+      "id": "db6298bb-7a37-4dd4-bf04-9c48aa258e65",
       "name": "Respond to Webhook",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        736,
-        -224
+        256,
+        160
       ]
     },
     {
@@ -154,11 +154,56 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        512,
-        -224
+        32,
+        0
       ],
-      "id": "331dd3f5-6aac-47f6-b43d-b4973e5050e9",
+      "id": "3b8acf1a-5e77-40b0-aff2-3b8a3dc4bc89",
       "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "868c8d79-4a9b-4a8c-a773-b99ee96f8d61",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -176,
+        224
+      ],
+      "id": "a63c01e5-5df0-4c44-9bed-4aac13c0635a",
+      "name": "Webhook1",
+      "webhookId": "868c8d79-4a9b-4a8c-a773-b99ee96f8d61"
+    },
+    {
+      "parameters": {
+        "operation": "rowExists",
+        "dataTableId": {
+          "__rl": true,
+          "value": "40ztiP9pobB8O2c5",
+          "mode": "list",
+          "cachedResultName": "WhoIsUndercover",
+          "cachedResultUrl": "/projects/8DatqOHc7PjFwpEK/datatables/40ztiP9pobB8O2c5"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "session_id"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        32,
+        224
+      ],
+      "id": "f9d2309c-09db-4790-964e-174203e0f5f8",
+      "name": "If row exists"
     }
   ],
   "connections": {
@@ -174,6 +219,28 @@
       ]
     },
     "Insert row": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "If row exists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If row exists": {
       "main": [
         [
           {
