@@ -228,11 +228,12 @@
             }
         }
 
-        // 解碼 Base64
+        // 解碼 Base64 (支援中文)
         function decodeData(encoded) {
             try {
-                const decoded = atob(encoded);
-                return JSON.parse(decodeURIComponent(decoded));
+                // 先 Base64 解碼，再處理 UTF-8
+                const decoded = decodeURIComponent(escape(atob(encoded)));
+                return JSON.parse(decoded);
             } catch (e) {
                 console.error('解碼失敗:', e);
                 return null;

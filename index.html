@@ -313,9 +313,12 @@
             return newArray;
         }
 
-        // 編碼資料為 Base64
+        // 編碼資料為 Base64 (支援中文)
         function encodeData(data) {
-            return btoa(encodeURIComponent(JSON.stringify(data)));
+            const jsonStr = JSON.stringify(data);
+            // 使用 encodeURIComponent 處理中文，再轉 Base64
+            const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+            return encoded;
         }
 
         // 產生 QR Code URL
